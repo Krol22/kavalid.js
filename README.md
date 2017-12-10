@@ -47,4 +47,4 @@ API:
 
 * hideAllErrors( ) : _void_
 
-## [DEMO](https://krol22.github.io/validatorJs)
+## [DEMO](https://krol22.github.io/validator-html/)
