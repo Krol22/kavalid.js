@@ -10,14 +10,14 @@ Usage:
 
 * html
 
-Pattern for error is - ${inputName} + ${errorType}
-
 ```html
     <form id="#form">
         <input name="first_input" required/>
-        <div class="error first_input_err_required"/>
+        <div class="error first_input_err_required">Error message</div>
     </form>
 ```
+
+Message has to have an error class and 'input\_name + \_err_type' class. If you want to style input with an error just modify .error-input class.
 
 * js
 
