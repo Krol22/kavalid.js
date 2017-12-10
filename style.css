@@ -1,0 +1,20 @@
+label {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.error {
+    display: none;
+    font-size: 0.8em;
+    font-style: italic;
+    color: rgb(252, 113, 113);
+}
+
+#success_alert, #danger_alert {
+    display: none;
+}
+
+.error-input {
+    border: 1px solid rgb(252, 113, 113) !important;
+    background-color: rgb(253, 226, 226) !important;
+}

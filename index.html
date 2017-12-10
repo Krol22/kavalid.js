@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-8">
+                    <h1> Validator.JS </h1> 
+                    <h3> demo </h3>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+
+                <div class="col-8">
+                    <div id="success_alert" class="alert alert-success"> Your form is now valid! </div>
+                    <div id="danger_alert" class="alert alert-danger"> Your form is invalid! </div>
+
+                    <form id="form_1">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="field_required">Required field</label>
+                                    <input class="form-control" name="field_required" type="text" required/>
+                                    <div class="error field_required_err_required">* This field is required</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="field_pattern">Pattern field</label>
+                                    <input class="form-control" name="field_pattern" type="text" pattern="[a-z]*" value="1234"/>
+                                    <div class="error field_pattern_err_pattern">* Wrong pattern ([a-z]*) </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="field_type">Type field</label>
+                                    <input class="form-control" name="field_type" type="email" value="Wrong text"/>
+                                    <div class="error field_type_err_type">* Wrong type (email) </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="field_min">Min value field</label>
+                                    <input class="form-control" name="field_min" type="number" min="5" value="3"/>
+                                    <div class="error field_min_err_min_value">* This value has to be >= 5 </div>
+                                </div>
+                                <div class="col">
+                                    <label for="field_max">Max value field</label>
+                                    <input class="form-control" name="field_max" type="number" max="10" value="12"/>
+                                    <div class="error field_max_err_max_value">* This value has to be <= 10</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="field_step">Step field</label>
+                                    <input class="form-control" name="field_step" type="number" step="1"/>
+                                    <div class="error field_step_err_step">* Value has to be integer</div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+                                    <label for="field_min_length">Min length field</label>
+                                    <input class="form-control" name="field_min_length" type="text" minlength="3" required/>
+                                    <div class="error field_min_length_err_required">* This field is required </div>
+                                    <div class="error field_min_length_err_min_length">* Min length >= 3</div>
+                                </div>
+                                <div class="col">
+                                    <label for="field_max_length">Max length field</label>
+                                    <input class="form-control" name="field_max_length" type="text" maxlength="5" required/>
+                                    <div class="error field_max_length_err_required">* This field is required </div>
+                                    <div class="error field_max_length_err_max_length">* Max length <= 5</div>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="submit_button" class="btn btn-primary" type="button"> Submit </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+        <script src="lib/validator.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
