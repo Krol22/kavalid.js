@@ -1,8 +1,8 @@
 {
-  "name": "validator-html",
+  "name": "kavalid.js",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Simple library for validating forms with HTML5 validators. Now supports also custom validation rules",
+  "main": "validator.js",
   "scripts": {
     "lite": "lite-server --port 9000",
     "build": "gulp build",

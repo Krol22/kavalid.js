@@ -1,12 +1,12 @@
 # VaidatorJS  
 
-Simple library for validating forms with HTML5 validations. Now supports also custom validation rules.
+Simple library for validating forms with HTML5 validators. Now supports also custom validation rules.
 
 Dependencies: **none**,
 
 Usage: 
 
-* install download directly from github
+* install it by downloading directly from github
 
 * html
 
@@ -98,4 +98,4 @@ Example rule:
 ```
 
 
-## [DEMO](https://krol22.github.io/validator-html/)
+## [DEMO](https://krol22.github.io/kavalid.js)

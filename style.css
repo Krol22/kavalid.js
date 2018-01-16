@@ -18,3 +18,8 @@ label {
     border: 1px solid rgb(252, 113, 113) !important;
     background-color: rgb(253, 226, 226) !important;
 }
+
+.title-row {
+    text-align: center;
+    margin: 40px 0px;
+}
