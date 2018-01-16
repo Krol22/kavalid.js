@@ -25,6 +25,7 @@ var Validator = function () {
 
         _classCallCheck(this, Validator);
 
+        this._customRules = {};
         this._form = form;
         this._formInputs = Array.from(this._form.elements).filter(isInputElement);
 
@@ -43,11 +44,23 @@ var Validator = function () {
 
             var isValid = true;
 
-            this._formInputs.forEach(function validateInput(field) {
+            this._formInputs.some(function validateInput(field) {
                 if (!field.checkValidity()) {
                     isValid = false;
                 }
+
+                return !isValid;
             });
+
+            if (isValid) {
+                this._formInputs.some(function (field) {
+                    isValid = !Array.from(_this2._customRules).find(function (rule) {
+                        return rule(field);
+                    });
+
+                    return !isValid;
+                });
+            }
 
             if (!isValid) {
                 this._formInputs.forEach(function (field) {
@@ -60,18 +73,23 @@ var Validator = function () {
     }, {
         key: 'validateField',
         value: function validateField(field) {
+            var _this3 = this;
+
+            var error;
             this.hideFieldErrors(field);
             field.classList.remove('error-input');
-            var isNotValid = Object.keys(errValidityMap).find(function showError(errorType) {
-                var error = form.getElementsByClassName('' + field.name + errValidityMap[errorType])[0];
+            var isNotValid = Object.keys(errValidityMap).some(function (errorType) {
+                error = _this3._form.getElementsByClassName('' + field.name + errValidityMap[errorType])[0];
                 if (field.validity[errorType] && error) {
-                    error.style.display = 'inline-block';
                     return true;
+                } else if (_this3._customRules[errorType] && error) {
+                    return _this3._customRules[errorType](field);
                 }
                 return false;
             });
 
             if (isNotValid) {
+                error.style.display = 'inline-block';
                 field.classList.add('error-input');
                 return false;
             }
@@ -81,8 +99,10 @@ var Validator = function () {
     }, {
         key: 'hideFieldErrors',
         value: function hideFieldErrors(field) {
-            Object.values(errValidityMap).forEach(function hideError(errorType) {
-                var error = form.getElementsByClassName('' + field.name + errorType)[0];
+            var _this4 = this;
+
+            Object.values(errValidityMap).forEach(function (errorType) {
+                var error = _this4._form.getElementsByClassName('' + field.name + errorType)[0];
                 if (error) {
                     error.style.display = 'none';
                 }
@@ -92,6 +112,16 @@ var Validator = function () {
         key: 'hideAllErrors',
         value: function hideAllErrors() {
             this._formInputs.forEach(hideFieldErrors);
+        }
+    }, {
+        key: 'addCustomRule',
+        value: function addCustomRule(newCustomRule) {
+            if (this._customRules[newCustomRule.name]) {
+                throw new Error('Custom validator named ' + newCustomRule.name + ' is already defined!');
+            }
+
+            this._customRules[newCustomRule.name] = newCustomRule.validator;
+            errValidityMap[newCustomRule.name] = '_err_' + newCustomRule.name;
         }
     }]);
 

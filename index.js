@@ -5,6 +5,18 @@ var dangerAlert = document.querySelectorAll('#danger_alert')[0];
 
 var formValidator = new Validator(form);
 
+formValidator.addCustomRule({
+    name: 'confirm_password',
+    validator: function(input) {
+        // true when valid, false when invalid.
+        if(input.name === 'field_password_confirm') {
+            var passwdInput = form.querySelector('input[name="field_password"]');
+            return passwdInput.value === input.value;
+        } 
+        return true;
+    }
+});
+
 var fields = Array.from(form.elements);
 fields[5].value = 1.1;
 
