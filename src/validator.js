@@ -107,6 +107,11 @@ class Validator {
 
         this._customRules[newCustomRule.name] = newCustomRule.validator;
         errValidityMap[newCustomRule.name] = `_err_${newCustomRule.name}`;
+
     }
 
+}
+
+if ( typeof module !== 'undefined' && module.hasOwnProperty('exports') ) {
+    module.exports = Validator;
 }
