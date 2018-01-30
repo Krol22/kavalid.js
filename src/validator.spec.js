@@ -1,7 +1,6 @@
 var Validator = require('./validator.js');
 
 describe('Validator', function() {
-
     var fakeElement_1 = {
         name: 'fake-element-1',
         nodeName: 'INPUT',
@@ -133,8 +132,22 @@ describe('Validator', function() {
 
     describe('validateField', function() {
 
+        var fakeError = {
+            style: { display: '' }
+        };
+
         beforeEach(function() {
             spyOn(validator, 'hideFieldErrors');
+            spyOn(validator._form, 'getElementsByClassName').and.returnValue([ fakeError ]);
+
+            fakeElement_1.validity['valueMissing'] = false;
+            fakeElement_1.validity['patternMismatch'] = false;
+            fakeElement_1.validity['typeMismatch'] = false;
+            fakeElement_1.validity['rangeOverflow'] = false;
+            fakeElement_1.validity['rangeUnderflow'] = false;
+            fakeElement_1.validity['stepMismatch'] = false;
+            fakeElement_1.validity['tooLong'] = false;
+            fakeElement_1.validity['tooShort'] = false;
         });
 
         it('should hide all errors on field', function() {
@@ -151,8 +164,41 @@ describe('Validator', function() {
             expect(fakeElement_1.classList.remove).toHaveBeenCalledWith('error-input');
         });
 
-        /* TODO */
+        it('should return false if field is not valid', function() {
+            fakeElement_1.validity['rangeUnderflow'] = true;
 
+            var isValid = validator.validateField(fakeElement_1);
+
+            expect(isValid).toBe(false);
+        });
+
+        it('should return false if field is not valid (custom rule check)', function() {
+            validator._customRules['rangeUnderflow'] = function(field) {
+                return false;
+            }
+
+            spyOn(validator._customRules, 'rangeUnderflow').and.callThrough();
+
+            var isValid = validator.validateField(fakeElement_1);
+
+            expect(isValid).toBe(false);
+        });
+
+        it('should show error and add "error-input" class to field when it is invalid', function() {
+            spyOn(fakeElement_1.classList, 'remove');
+            fakeElement_1.validity['tooShort'];
+
+            validator.validateField(fakeElement_1);
+
+            expect(fakeError.style.display).toBe('inline-block');
+            expect(fakeElement_1.classList.remove).toHaveBeenCalledWith('error-input');
+        });
+
+        it('should return true if field is valid', function() {
+            var isValid = validator.validateField(fakeElement_1);
+
+            expect(isValid).toBe(true);
+        });
     });
 
     describe('hideFieldErrors', function() {
